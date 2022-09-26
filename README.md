@@ -15,12 +15,12 @@ I try to follow the original desing as much as possible, with some licenses:
 
 Rom is no available until have a clear idea of it's copyright.
 
-I test with Rom version 1.10, work, but superbasic command play seen to be erratic an
+I test with Rom versions 1.10, 1.31 and 1.40 and work, but superbasic command play seen to be erratic and
 sometimes work and other, the same command do not work.
 
-There is no software available for this card (as far as I know)
+There is no software available for this card (as far as I know/test)
 
-You can use a 2764 eprom or a 27F512 flash, that is much more cheap and easy to use.
+You can use a 2764 eprom or a W27C512 flash, that is much more cheap and easy to use.
 
 This board user the default Motorola 68K inteface as described in the documentation of AY-3-8910 PSG. with a 6821 PIA as a glue between the QL and the PSG, in the info folder you can found aditional information about this chips or the interface.
 
