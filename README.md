@@ -22,10 +22,11 @@ There is no software available for this card (as far as I know)
 
 You can use a 2764 eprom or a 27F512 flash, that is much more cheap and easy to use.
 
-This board is a bit stranger, it use 6821 PIA as a glue between the QL and the PSG (the sound chip)
-I'm not sure why, can be related with the use of buffer, or something similar, I have not idea, anyway, the card have a full 8bit I/O in the PSG without use, and another 8 bits in the PIA.
+This board user the default Motorola 68K inteface as described in the documentation of AY-3-8910 PSG. with a 6821 PIA as a glue between the QL and the PSG, in the info folder you can found aditional information about this chips or the interface.
 
-Also they use the E signal as a clock for the PSG, this cause that the PSG work in a very low frecuency, below the minimun indicated in the datasheet, and also this cause that tunes from Spectrum or other systems, can not be directly converted.
+The card have full 8bit I/O in the PSG without use, and another 8 bits in the PIA, also the pins of the paralel port are directly wired to the PSG, and are bidirectional, so can be used for other propouses.
+
+The board use the E signal as a clock for the PSG, this cause that the PSG work in a very low frecuency, below the minimun indicated in the datasheet, and also this cause that tunes from Spectrum or other systems, can not be directly converted.
 
 ![My image](QL_Qsound_1.png) 
 

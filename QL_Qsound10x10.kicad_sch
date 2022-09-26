@@ -5,8 +5,8 @@
   (paper "A3")
 
   (title_block
-    (title "Kempston Interface Disc for Sinclair QL")
-    (date "2021-09-12")
+    (title "QSound/Qprint Interface for Sinclair QL")
+    (date "2022-09-26")
     (rev "0.0a")
     (company "Alvaro Alea Fdz")
   )
