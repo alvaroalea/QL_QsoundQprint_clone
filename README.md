@@ -6,8 +6,8 @@ License under: CERN Open Hardware Licence Version 2 - Strongly Reciprocal
 
 https://ohwr.org/cern_ohl_s_v2.txt
 
-#IMPORTANT NOTE
-#BY NOW THERE IS A BUG IN THE DESIGN THAT CAUSE THE INTERFACE NOT WORK, DO NOT USE UNTIL I REMOVE THIS NOTE
+# IMPORTANT NOTE
+# BY NOW THERE IS A BUG IN THE DESIGN THAT CAUSE THE INTERFACE NOT WORK, DO NOT USE UNTIL I REMOVE THIS NOTE
 
 I try to follow the original desing as much as possible, with some licenses:
 
