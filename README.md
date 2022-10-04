@@ -6,6 +6,9 @@ License under: CERN Open Hardware Licence Version 2 - Strongly Reciprocal
 
 https://ohwr.org/cern_ohl_s_v2.txt
 
+#IMPORTANT NOTE
+#BY NOW THERE IS A BUG IN THE DESIGN THAT CAUSE THE INTERFACE NOT WORK, DO NOT USE UNTIL I REMOVE THIS NOTE
+
 I try to follow the original desing as much as possible, with some licenses:
 
 - It's 10mm short, to fit in a 10x10cm, that is a lot cheaps if order PCB.
