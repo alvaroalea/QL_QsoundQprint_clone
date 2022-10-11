@@ -6,9 +6,6 @@ License under: CERN Open Hardware Licence Version 2 - Strongly Reciprocal
 
 https://ohwr.org/cern_ohl_s_v2.txt
 
-# IMPORTANT NOTE
-# BY NOW THERE IS A BUG IN THE DESIGN THAT CAUSE THE INTERFACE NOT WORK, DO NOT USE UNTIL I REMOVE THIS NOTE
-
 I try to follow the original desing as much as possible, with some licenses:
 
 - It's 10mm short, to fit in a 10x10cm, that is a lot cheaps if order PCB.
@@ -16,12 +13,9 @@ I try to follow the original desing as much as possible, with some licenses:
 - I use a electrolitic capacitor instead the original tantalo one.
 - There are some jumper to allow a future ACB stereo mix.
 
-Rom is no available until have a clear idea of it's copyright.
+This project can not be possible without the help of silvester, that tracked a fault in the schematic and Marcel Kilgus that develop a new ROM with a qsound device and a pt3 player.
 
-I test with Rom versions 1.10, 1.31 and 1.40 and work, but superbasic command play seen to be erratic and
-sometimes work and other, the same command do not work.
-
-There is no software available for this card (as far as I know/test)
+I test with ROM versions 1.10, 1.31 and 1.40 and work as expected, new ROM do not have the printer routines, but have a new options used by the pt3 player. 
 
 You can use a 2764 eprom or a W27C512 flash, that is much more cheap and easy to use.
 
