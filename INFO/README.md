@@ -88,20 +88,38 @@ CLR.B     $0003(A5)           ; disable all interupts and select Direction for P
 MOVE.B    #$0F,$0002(A5)      ; set BC0, BDIR, Strobe as ouput, and Busy as input
 MOVE.B    #$04,$0003(A5)      ; select register data, any access to $0002(A5) now will be to Port B
 
-MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so PSG inactive
+MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 0, so PSG inactive (bit 1 and bit 4(Strobe) as 1 but not used) 
 
 
 ; Write D1 on register D2
 
 MOVE.B    D2  ,$0000(A5)      ; Write the Register Number to port A
 MOVE.B    #$0F,$0002(A5)      ; Set BC1 to 1, and BDIR to 1 latch adress of port A to PSG
-MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so PSG inactive
+MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 0, so PSG inactive
 
 MOVE.B    D1,  $0000(A5)      ; Write the Data to port A
 MOVE.B    #$0E,$0002(A5)      ; Set BC1 to 0, and BDIR to 1 write data of port A to register of PSG
-MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so PSG inactive
+MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 0, so PSG inactive
 ```
 
+```
+; Read on D1 the register D2 (not tested)
 
+MOVE.B    D2  ,$0000(A5)      ; Write the Register Number to port A
+MOVE.B    #$0F,$0002(A5)      ; Set BC1 to 1, and BDIR to 1 latch adress of port A to PSG
+MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 0, so PSG inactive
+
+CLR.B     $0001(A5)           ; disable all interupts and select Direction for Port A
+MOVE.B    #$00,$0000(A5)      ; configure all bits of Port A as Input
+MOVE.B    #$04,$0001(A5)      ; select register data, any read on $0000(A5) now will be from Port A
+
+MOVE.B    #$08,$0002(A5)      ; Set BC1 to 1, and BDIR to 0 read register of PSG and put in port A
+MOVE.B    $0000(A5),D1        ; Read port A and put on D1
+MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 0, so PSG inactive
+
+CLR.B     $0001(A5)           ; disable all interupts and select Direction for Port A
+MOVE.B    #$FF,$0000(A5)      ; configure all bits of Port A as Output
+MOVE.B    #$04,$0001(A5)      ; select register data, any write to $0000(A5) now will be put on Port A
+```
 
 
