@@ -67,7 +67,7 @@ When you write to the Data direction, each bit indicate if Port bit is Input (wh
 
 So a sequence to write to a register on the PSG shall be:
 
-...
+```
 ; INIT
 
 LEA       LPSG_io,A5          ; A5 = base address of I/O Port of 6821, (0x12000)
@@ -92,8 +92,7 @@ MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so inactive.
 MOVE.B    D1,  $0000(A5)      ; Write the Data to port A
 MOVE.B    #$0E,$0002(A5)      ; Set BC1 to 0, and BDIR to 1 write data of port A to register of PSG
 MOVE.B    #$0A,$0002(A5)      ; "write" (graba el valor en el registro) y vuelve a inactivo
-...
-
+```
 
 
 
