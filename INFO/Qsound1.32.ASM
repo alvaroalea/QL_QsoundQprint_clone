@@ -116,27 +116,29 @@ Lab0012   MOVEQ     #-$06,D0
 *  Address $10168
 Lab0013   CMPI.B    #$0D,D2
           BHI.S     Lab0010
-*  Address $1016E
-Lab0014   CMPI.B    #$07,D2
-          BNE.S     Lab0015
-          ORI.B     #$C0,D1
-*  Address $10178
-Lab0015   MOVE.L    A5,-(A7)
-          LEA       LPSG_io,A5
-          ANDI.W    #$000F,D2
-          MOVE.B    D2,$0000(A5)
-          MOVE.B    #$0F,$0002(A5)
-          MOVE.B    #$0A,$0002(A5)
-          MOVE.B    D1,$0000(A5)
-          MOVE.B    #$0E,$0002(A5)
-          MOVE.B    #$0A,$0002(A5)
+
+*  Address $1016E  old Lab0014
+Lay_wrpsg CMPI.B    #$07,D2        ; jump if register adress is NOT 07
+          BNE.S     Lay_wrps1
+          ORI.B     #$C0,D1        ; ensure bit 6,7 are 1, so output ports of PSG are configured as Output.
+*  Address $10178  old Lab0015
+Lay_wrps1 MOVE.L    A5,-(A7)       ; save A5 in stack
+          LEA       LPSG_io,A5     ; A5 with base adress of PIO
+          ANDI.W    #$000F,D2      ; ensure register adress is under 15
+          MOVE.B    D2,$0000(A5)   ; put register D2 in port A of PIO
+          MOVE.B    #$0F,$0002(A5) ; latch register BC1=1, BDIR=1
+          MOVE.B    #$0A,$0002(A5) ; PSG inactive BC1=1, BDIR=0
+          MOVE.B    D1,$0000(A5)   ; put data D1 in port A of PIO
+          MOVE.B    #$0E,$0002(A5) ; write register BC1=0, BDIR=1
+          MOVE.B    #$0A,$0002(A5) ; PSG inactive BC1=1, BDIR=0
           MOVEA.L   SV.AYBAS,A5
-          ADDA.L    #$00000080,A5
-          MOVE.B    D1,$00(A5,D2.W)
-          MOVEQ     #$00,D0
-          MOVEA.L   (A7)+,A5
+          ADDA.L    #$00000080,A5  ; SV.AYBAS+0x80 is a local copy of the PSG register
+          MOVE.B    D1,$00(A5,D2.W); write the register copy
+          MOVEQ     #$00,D0        ; D0 = 0, no error
+          MOVEA.L   (A7)+,A5       ; restore A5
           RTS
-*  Address $101B8
+
+          *  Address $101B8
 Lab0016   CMPI.B    #$0D,D2
           BHI.S     Lab0010
 *  Address $101BE
@@ -167,9 +169,9 @@ Lab0019   MOVEQ     #$00,D0
           LEA       $11810,A1
 
 *  Address $10200
-Lay_wrall MOVEQ     #$00,D2
+Lay_wrall MOVEQ     #$00,D2      ; write the 14 values pointed by A1 to the PSG
 Lab0021   MOVE.B    $00(A1,D2.W),D1
-          BSR       Lab0014
+          BSR       Lay_wrpsg
           ADDQ.W    #1,D2
           CMPI.B    #$0E,D2
           BNE.S     Lab0021
@@ -715,7 +717,7 @@ Lpokeay   MOVEA.W   $0112,A2
           BNE       Lab0027
           MOVE.W    $00(A6,A1.L),D2
           MOVE.W    $02(A6,A1.L),D1
-          BRA       Lab0014
+          BRA       Lay_wrpsg
 *  Address $106C6
 Lcurflash MOVEA.W   $0112,A2
           JSR       (A2)
