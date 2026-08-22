@@ -29,9 +29,9 @@ the Qsound memory base address will be on 0b110000xxxxxxxxxxxxxx or 0xC0000.
 
 This is also the unique address that is recognized by some ROM versions.
 
-Of this memory the first 8K (0xC0000 to 0xC3FFF) is decoded for the ROM of the Qsound.
+Of this memory the first 8K (0xC0000 to 0xC1FFF) is decoded for the ROM of the Qsound.
 
-The 6821 PIO is decoded using A0,A1 and A13 to A19, so will be available in the top 8K of the card (0b1100001xxxxxxxxxxxAB)
+The 6821 PIO is decoded using A0,A1 and A13 to A19, so will be available in the top 8K of the card (0b1100001xxxxxxxxxxxAB or 0xC2000 to 0xC3FFF)
 
 Is expected that the ROM wil be reallocatable, and should work on any of the 16 bank of ROM (PENDING TO CONFIRM) so the 6821 can be also allocated in any of this bank.
 
