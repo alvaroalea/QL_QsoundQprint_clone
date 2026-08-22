@@ -77,7 +77,8 @@ So a sequence to write to a register on the PSG shall be:
 ```
 ; INIT OF PIO
 ; at 0xC0032
-LEA       LPSG_io,A5          ; A5 = base address of I/O Port of 6821, (0xC2000) en realidad LEA $1FCC(PC),A5 usa direc. relativo al PC (0xC0032 + 0x02 + 0x1FFCC = 0xC2000)
+LEA       LPSG_io,A5          ; A5 = base address of I/O Port of 6821, (0xC2000) 
+; Really  LEA $1FCC(PC),A5 it use relative directions (d16,PC) so (0xC0032 + 0x02 + 0x1FFCC = 0xC2000)
 
 CLR.B     $0001(A5)           ; disable all interupts and select Direction for Port A
 MOVE.B    #$FF,$0000(A5)      ; configure all bits of Port A as Output
