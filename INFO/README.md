@@ -46,7 +46,7 @@ The pio has 2 8-bit lines, that the use of A or B is defined by RS1, that is A1 
 - RS1 on 6821 is conected to The A1 on the QL
 - RESET on 6821 is conected to RESET on the QL
 
-RS0 manage the Port in use, 0 for A, 1 for B.
+RS0 manage the Port in use, 0 for A, 1 for B. 
 
 - When RS1 is 1, you write to Control register of each port.
 - When RS1 is 0, depend on the bit 2 of Control register you access to Data Direction (if 0) or the port itself (if 1)
@@ -54,6 +54,11 @@ RS0 manage the Port in use, 0 for A, 1 for B.
 The other bits of Control Register are related to interuptions and are not in use for this card.
 
 When you write to the Data direction, each bit indicate if Port bit is Input (when 1) or output (when 0)
+
+Control Register Port A is 0b1100001xxxxxxxxxxx00 or 0xC2000 
+General Register Port A is 0b1100001xxxxxxxxxxx10 or 0xC2002
+Control Register Port B is 0b1100001xxxxxxxxxxx01 or 0xC2001
+General Register Port B is 0b1100001xxxxxxxxxxx11 or 0xC2003
 
 
 ## PSG (GI AY-3-8910)
@@ -71,8 +76,8 @@ So a sequence to write to a register on the PSG shall be:
 
 ```
 ; INIT OF PIO
-
-LEA       LPSG_io,A5          ; A5 = base address of I/O Port of 6821, (0x12000)
+; at 0xC0032
+LEA       LPSG_io,A5          ; A5 = base address of I/O Port of 6821, (0xC2000) en realidad LEA $1FCC(PC),A5 usa direc. relativo al PC (0xC0032 + 0x02 + 0x1FFCC = 0xC2000)
 
 CLR.B     $0001(A5)           ; disable all interupts and select Direction for Port A
 MOVE.B    #$FF,$0000(A5)      ; configure all bits of Port A as Output
