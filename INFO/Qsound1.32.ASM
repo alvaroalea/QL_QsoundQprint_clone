@@ -127,10 +127,10 @@ Lay_wrps1 MOVE.L    A5,-(A7)       ; save A5 in stack
           ANDI.W    #$000F,D2      ; ensure register adress is under 15
           MOVE.B    D2,$0000(A5)   ; put register D2 in port A of PIO
           MOVE.B    #$0F,$0002(A5) ; latch register BC1=1, BDIR=1
-          MOVE.B    #$0A,$0002(A5) ; PSG inactive BC1=1, BDIR=0
+          MOVE.B    #$0A,$0002(A5) ; PSG inactive BC1=0, BDIR=0
           MOVE.B    D1,$0000(A5)   ; put data D1 in port A of PIO
           MOVE.B    #$0E,$0002(A5) ; write register BC1=0, BDIR=1
-          MOVE.B    #$0A,$0002(A5) ; PSG inactive BC1=1, BDIR=0
+          MOVE.B    #$0A,$0002(A5) ; PSG inactive BC1=0, BDIR=0
           MOVEA.L   SV.AYBAS,A5
           ADDA.L    #$00000080,A5  ; SV.AYBAS+0x80 is a local copy of the PSG register
           MOVE.B    D1,$00(A5,D2.W); write the register copy
