@@ -58,6 +58,8 @@ When you write to the Data direction, each bit indicate if Port bit is Input (wh
 
 ## PSG (GI AY-3-8910)
 
+The three channels are interconected, so sound is monoaural.
+
 - The data bus of the PGS is conected to the Port A of the PIO.
 - BC1 is conected to bit 0 of PIO's port B 
 - BC2 is tied to 1 (Vcc) 
@@ -68,7 +70,7 @@ When you write to the Data direction, each bit indicate if Port bit is Input (wh
 So a sequence to write to a register on the PSG shall be:
 
 ```
-; INIT
+; INIT OF PIO
 
 LEA       LPSG_io,A5          ; A5 = base address of I/O Port of 6821, (0x12000)
 
@@ -80,18 +82,18 @@ CLR.B     $0003(A5)           ; disable all interupts and select Direction for P
 MOVE.B    #$0F,$0002(A5)      ; set BC0, BDIR, Strobe as ouput, and Busy as input
 MOVE.B    #$04,$0003(A5)      ; select register data, any access to $0002(A5) now will be to Port B
 
-MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so inactive.
+MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so PSG inactive
 
 
 ; Write D1 on register D2
 
 MOVE.B    D2  ,$0000(A5)      ; Write the Register Number to port A
 MOVE.B    #$0F,$0002(A5)      ; Set BC1 to 1, and BDIR to 1 latch adress of port A to PSG
-MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so inactive.
+MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so PSG inactive
 
 MOVE.B    D1,  $0000(A5)      ; Write the Data to port A
 MOVE.B    #$0E,$0002(A5)      ; Set BC1 to 0, and BDIR to 1 write data of port A to register of PSG
-MOVE.B    #$0A,$0002(A5)      ; "write" (graba el valor en el registro) y vuelve a inactivo
+MOVE.B    #$0A,$0002(A5)      ; Set BC1 to 0, and BDIR to 1, so PSG inactive
 ```
 
 
